@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playtopia</title>
+    <script src="https://kit.fontawesome.com/355993ce43.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mediaqueries.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="gameDataStyle.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top nav-custom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto nav-color">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Play <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signup.html">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="patron.html">Patron</a>
+                </li>
+            </ul>
+        </div>
+        <a class="navbar-brand mx-auto text-center logo-center" href="index.html">
+            <h1 class="logo-img gradient">Playtopia</h1>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="News.html">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboards.html">Leaderboards</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="inner">
+        <div class="wof-banner">
+            <div class="game-header-details">
+                <div class="game-header-details-top">
+                    <img src="./assets/wof-icon.png" alt="" class="game-icon">
+                    <div class="game-name-details">
+                        <div class="game-nme">
+                            Wheels of Fury
+                        </div>
+                        <div class="game-category">
+                            Racing, Action
+                        </div>
+                    </div>
+                </div>
+                <div class="game-header-details-middle">
+                    Race And Survive To The Finish Line
+                </div>
+                <button onclick="window.open('https://dg-cent-wof.netlify.app/')" class="game-header-bottom">Play
+                    Now</button>
+            </div>
+        </div>
+        <section id="trailer">
+            <h1 class="title-thick">Trailer</h1>
+            <video width="640" height="auto" poster="./assets/WOFTrailerThumbnail.png" controls class="trailer">
+                <source src="./assets/WOFTrailer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section id="about">
+            <div class="about-inner">
+                <h1 class="title-thick">About Game</h1>
+                <p class="text-content">Wheels of Fury is an adrenaline-pumping action racing game that pushes the
+                    boundaries of traditional racing. In this high-octane experience, speed alone isn't enough—you’ll
+                    need to fight your way to victory!</p>
+                <ul class="about-list">
+                    <li class="text-content"><b>Action-Packed Racing:</b> Race against time and fierce AI opponents as
+                        you
+                        blaze through intense tracks. Reaching the finish line is just the beginning; you’ll need to
+                        battle enemies along the way to secure your victory.</li>
+                    <li class="text-content"><b>Unlockable Cars:</b> Choose from over 20 different cars, each with its
+                        own
+                        unique design and capabilities. Unlock new vehicles as you progress, with each car offering
+                        different strengths to suit your racing and combat style.</li>
+                    <li class="text-content"><b>Obstacles:</b> Face various challenges that test your skills, including
+                        time-limited races and battles against AI-controlled enemies who are as relentless as they are
+                        cunning.</li>
+                </ul>
+                </p>
+            </div>
+        </section>
+        <section id="screenshots">
+            <h1 class="title-thick">Screenshots</h1>
+            <div class="screenshot-container">
+                <img src="https://static.wixstatic.com/media/7e1492_dcac8f3606ed496dbcd19a6720e84e85~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_dcac8f3606ed496dbcd19a6720e84e85~mv2.png"
+                    class="ss-img">
+                <img src="https://static.wixstatic.com/media/7e1492_3feaca32d5cd4c9cb04f687bae290940~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_3feaca32d5cd4c9cb04f687bae290940~mv2.png"
+                    class="ss-img">
+                <img src="https://static.wixstatic.com/media/7e1492_0c9aa5c658f142fdb29414bad230400b~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_0c9aa5c658f142fdb29414bad230400b~mv2.png"
+                    class="ss-img">
+                <img src="https://static.wixstatic.com/media/7e1492_b55b8919b02a4473ab31b12ac533321a~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_b55b8919b02a4473ab31b12ac533321a~mv2.png"
+                    class="ss-img">
+                <img src="https://static.wixstatic.com/media/7e1492_70ceb87331bd420aa3bbcad3d2284c41~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_70ceb87331bd420aa3bbcad3d2284c41~mv2.png"
+                    class="ss-img">
+                <img src="https://static.wixstatic.com/media/7e1492_fea9db5ab9154ffc8a0f3aa5a48d5005~mv2.png/v1/fill/w_780,h_441,q_90/7e1492_fea9db5ab9154ffc8a0f3aa5a48d5005~mv2.png"
+                    class="ss-img">
+            </div>
+        </section>
+    </div>
+    <footer class="footer-class">
+        © 2024 Playtopia.com Ltd. Playtopia, the Playtopia logo, the game names and related marks are trade marks of
+        Playtopia.com Ltd or related entities. All rights reserved
+    </footer>
+</body>
+
+</html>
