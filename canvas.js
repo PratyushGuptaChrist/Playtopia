@@ -5,6 +5,9 @@ window.addEventListener('load', () => {
     canvas.height=window.innerHeight;
     canvas.width=window.innerWidth;
 
+    ctx.font = "30px Arial";
+    ctx.fillText("Draw", 700, 50);
+
     let painting = false;
 
     function startPosition(){
@@ -22,8 +25,6 @@ window.addEventListener('load', () => {
         ctx.lineCap = 'round';
         ctx.lineTo(e.clientX, e.clientY);
         ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(e.clientX, e.clientY);
     }
     canvas.addEventListener('mousedown', startPosition);
     canvas.addEventListener('mouseup', finishPosition);

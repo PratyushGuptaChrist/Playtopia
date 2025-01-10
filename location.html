@@ -21,11 +21,9 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 </head>
 
@@ -47,7 +45,7 @@
                     <a class="nav-link" href="signup.html">Sign up</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="patron.html">Patron</a>
+                    <a class="nav-link" href="patron.html">Patron</a>
                 </li>
             </ul>
         </div>
@@ -75,110 +73,125 @@
             <div id="map"></div>
 
             <script>
-                // Initialize the map
-                var map = L.map('map').setView([17.385044, 78.486671], 12); // Default to Hyderabad coordinates
-        
-                // Set up the OpenStreetMap layer
+                var map = L.map('map').setView([17.385044, 78.486671], 12);
+
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
-        
-                // Hyderabad's location (latitude, longitude)
+
                 var hyderabadLocation = [17.385044, 78.486671];
-        
-                // Variable to store user's location
                 var userLocation;
-        
-                // Use Geolocation API to get user's current location
+
                 if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        // Get user's coordinates
+                    navigator.geolocation.getCurrentPosition(function (position) {
                         var userLat = position.coords.latitude;
                         var userLon = position.coords.longitude;
-        
-                        // Set the map view to user's current location and zoom in
+
+                        console.log("User Location:", userLat, userLon);
+
                         map.setView([userLat, userLon], 13);
-        
-                        // Add a marker for the user's current location with a custom icon
+
+                        // User marker
                         var userMarker = L.marker([userLat, userLon], {
                             icon: L.icon({
-                                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', // Default marker icon
-                                iconSize: [25, 41], // Icon size
-                                iconAnchor: [12, 41], // Anchor point for the icon
-                                popupAnchor: [1, -34] // Popup anchor
+                                iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+                                iconSize: [25, 41],
+                                iconAnchor: [12, 41],
+                                popupAnchor: [1, -34]
                             })
-                        }).addTo(map);
-        
-                        // Store the user's location
+                        }).addTo(map).bindPopup("<b>Your Location</b>").openPopup();
+
                         userLocation = [userLat, userLon];
 
-                        // Add a marker for Hyderabad with a custom icon
                         var hyderabadMarker = L.marker(hyderabadLocation).addTo(map)
-                        .bindPopup("<b>Hyderabad</b><br>India").openPopup();
+                            .bindPopup("<b>Hyderabad</b><br>India").openPopup();
 
-                        // Create a route from the user's location to Hyderabad
                         if (userLocation) {
                             var routeControl = L.Routing.control({
                                 waypoints: [
-                                    L.latLng(userLocation),  // User's location
-                                    L.latLng(hyderabadLocation)  // Hyderabad's location
+                                    L.latLng(userLocation),
+                                    L.latLng(hyderabadLocation)
                                 ],
                                 routeWhileDragging: true
                             }).addTo(map);
-        
-                            // Listen for the routefound event to get the bounds
-                            routeControl.on('routesfound', function(e) {
-                                // Get the bounds of the route
+
+                            routeControl.on('routesfound', function (e) {
                                 var bounds = e.routes[0].getBounds();
-                                
-                                // Fit the map to the route bounds, ensuring the whole route is visible
                                 map.fitBounds(bounds);
                             });
                         }
-                        
-        
-                    }, function(error) {
+                    }, function (error) {
                         alert("Geolocation error: " + error.message);
                     });
                 } else {
                     alert("Geolocation is not supported by this browser.");
                 }
+
             </script>
 
             <p class="section__text__p1">Hello, Playtopians! 🌟
 
-                We have some fantastic news that we’re thrilled to share with you today. Playtopia, your favorite online web games company, is all set to make its mark at one of the most anticipated events of the gaming world: IGDC 2025 (Indian Game Developers Conference)!<br><br>
-                
-                IGDC is known for being a hub where the brightest minds in the gaming industry come together to explore the latest trends, showcase new innovations, and celebrate the incredible diversity of gaming culture. And this year, Playtopia is ready to join the fun and showcase what we’ve been working on!<br><br>
-                
+                We have some fantastic news that we’re thrilled to share with you today. Playtopia, your favorite online
+                web games company, is all set to make its mark at one of the most anticipated events of the gaming
+                world: IGDC 2025 (Indian Game Developers Conference)!<br><br>
+
+                IGDC is known for being a hub where the brightest minds in the gaming industry come together to explore
+                the latest trends, showcase new innovations, and celebrate the incredible diversity of gaming culture.
+                And this year, Playtopia is ready to join the fun and showcase what we’ve been working on!<br><br>
+
                 <b>What Can You Expect from Playtopia at IGDC 2025?</b><br><br>
                 <b>Exclusive Sneak Peeks at Upcoming Games</b><br>
-                We know you love our wide variety of web-based games, and we can’t wait to reveal some exciting new projects in the works. If you’ve been eagerly awaiting fresh updates, new releases, and innovative gaming experiences, you’re in for a treat! Our team will be on hand, offering you a first look at the future of Playtopia’s web gaming universe.<br><br>
-                
+                We know you love our wide variety of web-based games, and we can’t wait to reveal some exciting new
+                projects in the works. If you’ve been eagerly awaiting fresh updates, new releases, and innovative
+                gaming experiences, you’re in for a treat! Our team will be on hand, offering you a first look at the
+                future of Playtopia’s web gaming universe.<br><br>
+
                 <b>Live Demos and Interactive Sessions</b><br>
-                Want to get a hands-on experience with our latest games? Join us for live demos and interactive gaming sessions throughout the event. Whether you're a casual player or a hardcore gamer, there’s something for everyone at Playtopia. It’s the perfect opportunity to dive into our web games and chat with the team behind them.<br><br>
-                
+                Want to get a hands-on experience with our latest games? Join us for live demos and interactive gaming
+                sessions throughout the event. Whether you're a casual player or a hardcore gamer, there’s something for
+                everyone at Playtopia. It’s the perfect opportunity to dive into our web games and chat with the team
+                behind them.<br><br>
+
                 <b>Meet the Creators</b><br>
-                Playtopia wouldn’t be where it is today without the passion and creativity of our incredible team. At IGDC 2025, you’ll have the chance to meet the developers, designers, and all the brilliant minds who bring our games to life. Get a behind-the-scenes look at our process and learn more about what goes into creating the next big thing in online gaming.<br><br>
-                
+                Playtopia wouldn’t be where it is today without the passion and creativity of our incredible team. At
+                IGDC 2025, you’ll have the chance to meet the developers, designers, and all the brilliant minds who
+                bring our games to life. Get a behind-the-scenes look at our process and learn more about what goes into
+                creating the next big thing in online gaming.<br><br>
+
                 <b>Networking with Industry Leaders</b><br>
-                IGDC is one of the best places to connect with the best and brightest in the gaming community. Whether you're a fellow game developer, a gamer, or an enthusiast, Playtopia is eager to meet and collaborate with like-minded individuals and companies. Expect plenty of networking opportunities, new ideas, and a chance to forge lasting relationships in the gaming industry.<br><br>
-                
+                IGDC is one of the best places to connect with the best and brightest in the gaming community. Whether
+                you're a fellow game developer, a gamer, or an enthusiast, Playtopia is eager to meet and collaborate
+                with like-minded individuals and companies. Expect plenty of networking opportunities, new ideas, and a
+                chance to forge lasting relationships in the gaming industry.<br><br>
+
                 <b>Why Playtopia at IGDC?</b><br>
-                At Playtopia, we’re passionate about making gaming accessible to everyone. We focus on creating exciting, easy-to-access web games that offer endless hours of entertainment. Our presence at IGDC 2025 reflects our commitment to pushing the boundaries of online gaming and engaging with the global gaming community.<br><br>
-                
-                We believe IGDC 2025 will be an incredible opportunity for us to connect with fellow developers, showcase our work, and engage with YOU, our amazing Playtopians, who make everything we do worthwhile. The gaming world is constantly evolving, and we’re ready to evolve alongside it, all while keeping the fun, creativity, and excitement at the heart of everything we do.<br><br>
-                
+                At Playtopia, we’re passionate about making gaming accessible to everyone. We focus on creating
+                exciting, easy-to-access web games that offer endless hours of entertainment. Our presence at IGDC 2025
+                reflects our commitment to pushing the boundaries of online gaming and engaging with the global gaming
+                community.<br><br>
+
+                We believe IGDC 2025 will be an incredible opportunity for us to connect with fellow developers,
+                showcase our work, and engage with YOU, our amazing Playtopians, who make everything we do worthwhile.
+                The gaming world is constantly evolving, and we’re ready to evolve alongside it, all while keeping the
+                fun, creativity, and excitement at the heart of everything we do.<br><br>
+
                 Join Us at IGDC 2025!<br>
-                So, whether you’re a fan of our current lineup of games or a curious gamer looking to discover something new, we’d love for you to stop by our booth at IGDC 2025. Prepare for exciting surprises, interactive gaming sessions, and a whole lot of fun as we come together to celebrate the incredible world of gaming.<br><br>
-                
-                Stay tuned to our social media channels and website for more details about our participation and updates as the event draws closer. And if you’re planning to attend IGDC 2025, don’t forget to tag us in your posts—we can’t wait to see you there!<br><br>
-                
-                Thank you for your ongoing support, Playtopians. See you at IGDC 2025, where gaming dreams come to life!<br><br>
-                
+                So, whether you’re a fan of our current lineup of games or a curious gamer looking to discover something
+                new, we’d love for you to stop by our booth at IGDC 2025. Prepare for exciting surprises, interactive
+                gaming sessions, and a whole lot of fun as we come together to celebrate the incredible world of
+                gaming.<br><br>
+
+                Stay tuned to our social media channels and website for more details about our participation and updates
+                as the event draws closer. And if you’re planning to attend IGDC 2025, don’t forget to tag us in your
+                posts—we can’t wait to see you there!<br><br>
+
+                Thank you for your ongoing support, Playtopians. See you at IGDC 2025, where gaming dreams come to
+                life!<br><br>
+
                 Playtopia Team<br>
-                Where every click brings a new adventure. 🎮✨</p>
-        
+                Where every click brings a new adventure. 🎮✨
+            </p>
+
         </section>
     </div>
     <footer class="footer-class">

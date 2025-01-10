@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<games xmlns="https://pratyushguptachrist.github.io/Playtopia/"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="https://pratyushguptachrist.github.io/Playtopia/ games.xsd">
+    <game>
+        <name>Wheels of Fury</name>
+        <image>./assets/WOF.png</image>
+        <link>https://dg-cent-wof.netlify.app/</link>
+    </game>
+    <game>
+        <name>Ball</name>
+        <image>./assets/project2.png</image>
+        <link>https://ballok.netlify.app</link>
+    </game>
+    <game>
+        <name>Draw</name>
+        <image>./assets/draw.png</image>
+        <link>draw.html</link>
+    </game>
+</games>
