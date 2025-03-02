@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="playtopiaApp">
 
 <head>
     <meta charset="UTF-8">
@@ -20,10 +20,11 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="script.js"></script>
 </head>
 
-<body>
+<body ng-controller="PatronController">
     <nav class="navbar navbar-expand-lg fixed-top nav-custom">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,12 +75,12 @@
                 </div>
             </div>
             <div class="patron-container">
-                <div class="amnt" onclick="patronAmntChoose('amnt1')" id="amnt1">5$</div>
-                <div class="amnt" onclick="patronAmntChoose('amnt2')" id="amnt2">10$</div>
-                <div class="amnt" onclick="patronAmntChoose('amnt3')" id="amnt3">25$</div>
-                <div class="amnt" onclick="patronAmntChoose('amnt4')" id="amnt4">50$</div>
-                <div class="amnt" onclick="patronAmntChoose('amnt5')" id="amnt5">100$</div>
-                <div class="amnt" onclick="patronAmntChoose('amnt6')" id="amnt6">250$</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt1')" ng-click="setPatronAmount(5)" id="amnt1">{{ 5 | currency }}</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt2')" ng-click="setPatronAmount(50)" id="amnt2">{{ 50 | currency }}</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt3')" ng-click="setPatronAmount(100)" id="amnt3">{{ 100 | currency }}</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt4')" ng-click="setPatronAmount(500)" id="amnt4">{{ 500 | currency }}</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt5')" ng-click="setPatronAmount(1000)" id="amnt5">{{ 1000 | currency }}</div>
+                <div class="amnt" onclick="patronAmntChoose('amnt6')" ng-click="setPatronAmount(5000)" id="amnt6">{{ 5000 | currency }}</div>
                 <div class="donate-btn">Donate Monthly</div>
             </div>
         </section>
@@ -88,6 +89,17 @@
         © 2024 Playtopia.com Ltd. Playtopia, the Playtopia logo, the game names and related marks are trade marks of
         Playtopia.com Ltd or related entities. All rights reserved
     </footer>
+
+    <script>
+        var app = angular.module("playtopiaApp", []);
+
+        app.controller("PatronController", function($scope) {
+            $scope.setPatronAmount = function(amount) {
+                $scope.selectedAmount = amount;
+                console.log("Patron amount set to:", $scope.selectedAmount);
+            }
+        });
+    </script>
 </body>
 
 </html>

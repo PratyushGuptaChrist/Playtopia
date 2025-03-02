@@ -129,6 +129,23 @@ a:hover{
     border-radius: 10px;
 }
 
+/* PROFILE */
+
+.profile-picture-container{
+    height: 50px;
+    width: 50px;
+    justify-self: center;
+    overflow: hidden;
+    margin-top: 30px;
+    border-radius: 50%;
+    border: 1px yellow solid;
+}
+
+#profile-picture{
+    height: 50px;
+    width: 50px;
+}
+
 /* UPCOMING */
 
 #upcoming{
@@ -180,6 +197,8 @@ a:hover{
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
+
+
 /* Games */
 
 #games{
@@ -207,6 +226,24 @@ a:hover{
     width: 256px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
+    transition: all 300ms ease;
+}
+
+.grid-item:hover .dev-name{
+    opacity: 1;
+}
+
+.grid-item:hover{
+    transform: translateY(-2px);
+}
+
+.dev-name{
+    font-size: 10px;
+    opacity: 0;
+    transition: all 300ms ease;
+    margin-left: 10px;
+    margin-top: -10px;
+    margin-bottom: 5px;
 }
 
 .game-img{

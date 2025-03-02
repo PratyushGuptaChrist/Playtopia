@@ -7,7 +7,7 @@
 
     <xsl:template match="/game:games">
         <xsl:for-each select="game:game">
-            <div class="grid-itme">
+            <div class="grid-item">
                 <a href="{game:link}">
                 <div class="grid-item">
                     <img src="{game:image}" class="game-img" alt=""/>

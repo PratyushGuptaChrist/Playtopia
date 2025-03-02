@@ -21,9 +21,10 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 
-<body>
+<body ng-app="playtopiaApp" ng-controller="GamesController">
   <nav class="navbar navbar-expand-lg fixed-top nav-custom">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,22 +63,33 @@
     </div>
   </nav>
   <div class="inner">
-    <img src="./assets/Magician.png" alt="" class="magician-img" id="magician-img">
+    <img src="./assets/Magician.png" alt="" class="magician-img" id="magician-img" ng-show="!searchText">
+
     <form class="form-inline my-2 my-lg-0 mx-auto searchbar" style="justify-self: center;">
       <input id="search" class="form-control mr-sm-2 searchbar" type="search" placeholder="Search Games"
-        aria-label="Search" onkeyup="searchFun()">
+        aria-label="Search" ng-model="searchText">
     </form>
-    <section id="upcoming">
+
+    <div class="profile-picture-container">
+      <img id="profile-picture" src="http://localhost:3000/uploads/default-profile.jpg" alt="">
+    </div>
+
+    <input type="file" id="file-input" accept="image/*" style="display: none;">
+
+    <section id="upcoming" ng-show="!searchText">
       <img src="./assets/king.png" alt="" class="king-img">
+
       <p class="section__text__p1">Check out our</p>
       <h1 class="title">Upcoming Games!</h1>
+
       <div class="section-container">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> -->
           </ol>
+
           <div class="carousel-inner carousel-round-border">
             <div class="carousel-item active">
               <img
@@ -132,6 +144,17 @@
             </div>
           </div>
         </a> -->
+
+        <a href="{{item.link}}" ng-repeat="item in gamesItem | filter:{name: searchText} as filteredGames">
+          <div class="grid-item" id="game1">
+            <img src="{{item.image}}" class="game-img">
+            <strong class="game-name">{{item.name | uppercase}}</strong>
+            <div class="game-info-btn" onclick="event.preventDefault(); window.open('wheelsOfFury.html', '_self')" ng-attr-title="upload date: {{item.upload_date | date: dd/MM/yyyy}}">
+              <span class="game-info-btn-text">i</span>
+            </div>
+            <span class="dev-name">by: {{item.developer}}</span>
+          </div>
+        </a>
       </div>
     </section>
   </div>
@@ -141,35 +164,36 @@
   </footer>
 
   <script>
-    function loadXMLDoc(xmlFile, xslFile){
-      let xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
-          let xml = this.responseXML;
-          let xsl = loadXSLT(xslFile);
-          transformXML(xml, xsl);
-        }
+    var app = angular.module("playtopiaApp", []);
+
+    app.controller('GamesController', function ($scope, $http) {
+      $http.get('Games.json').then(function (response) {
+        $scope.gamesItem = response.data;
+      }, function (error) {
+        console.error("Error loading JSON data: ", error);
+      });
+
+      $scope.openLink = function (item) {
+        window.location.href = item.link;
       };
-      xhttp.open("GET", xmlFile, true);
-      xhttp.send();
-    }
 
-    function loadXSLT(xslFile){
-      let xhttp = new XMLHttpRequest();
-      xhttp.open("GET", xslFile, false);
-      xhttp.send();
-      return xhttp.responseXML;
-    }
+      
+    });
 
-    function transformXML(xml, xsl){
-      let xsltProcessor = new XSLTProcessor();
-      xsltProcessor.importStylesheet(xsl);
-      let resultDocument = xsltProcessor.transformToFragment(xml, document);
-      document.getElementById("grid-container").appendChild(resultDocument);
-    }
+    var elements = document.querySelectorAll('.grid-item');
 
-    loadXMLDoc("games.xml", "games.xsl");
+      elements.forEach(function (element) {
+        if(element){
+          element.title = "" + item.upload-date;
+        }
+        else{
+          console.log("element not found");
+        }
+      });
+
   </script>
+  
+  <script src="pfpchange.js"></script>
 </body>
 
 </html>
