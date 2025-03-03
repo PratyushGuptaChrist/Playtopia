@@ -1,43 +1,45 @@
-function loadProfile() {
-    $.get('http://localhost:3000/profile', function(data) {
-      const profilePicture = data.user.profilePicture;
-      $('#profile-picture').attr('src', 'http://localhost:3000/uploads/' + profilePicture);
-    });
-  }
+async function uploadFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
 
-  // Trigger the file input when profile picture is clicked
-  $('#profile-picture').click(function() {
-    $('#fileInput').click();  // Simulate file input click
-  });
+    try {
+        const response = await fetch('http://localhost:3000/upload-file', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.text();
+        console.log(data);
+        alert(data);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error uploading file.');
+    }
+}
 
-  // Handle file input change (i.e., when user selects a new profile picture)
-  $('#fileInput').change(function(event) {
+$('#profile-picture').click(function() {
+    $('#file-input').click();
+});
+
+$('#file-input').change(function(event) {
     const fileInput = event.target;
     if (fileInput.files.length === 0) {
-      return;  // No file selected
+        return;
     }
+    const file = fileInput.files[0];
+    console.log(file);
 
-    const formData = new FormData();
-    formData.append('profilePicture', fileInput.files[0]);
+    uploadFile(file);
+});
 
-    // Upload the new profile picture
-    $.ajax({
-      url: 'http://localhost:3000/profile/picture',
-      type: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false,
-      success: function(response) {
-        alert(response.message);
-        loadProfile(); // Refresh the profile image
-      },
-      error: function(error) {
-        alert('Error uploading profile picture.');
-      }
-    });
-  });
-
-  // Load profile on page load
-  $(document).ready(function() {
-    loadProfile();
-  });
+fetch('http://localhost:3000/uploads/currentpfp')
+      .then(response => response.text())
+      .then(data => {
+        let startIndex = data.indexOf('uploads');
+        let result = data.substring(startIndex);
+        data = result;
+        document.getElementById('profile-picture').src = data;
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });

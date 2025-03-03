@@ -1,89 +1,59 @@
 const express = require('express');
-const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
+const multer = require('multer');
 
 const app = express();
+
+app.use(cors());
+
 const port = 3000;
 
-// Create the uploads folder if it doesn't exist
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
-
-// Set up multer storage for handling profile picture uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, uploadDir);  // Store files in the 'uploads' directory
+      cb(null, path.join(__dirname, 'uploads'));
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+      cb(null, file.originalname);
   }
 });
 
 const upload = multer({ storage: storage });
 
-// Middleware to parse JSON request bodies
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Serve static files (images) from the 'uploads' directory
-app.use('/uploads', express.static(uploadDir));
-
-// Helper function to read and write profile data from/to JSON file
-const readProfileData = () => {
-  const data = fs.readFileSync('profile.json', 'utf8');
-  return JSON.parse(data);
-};
-
-const writeProfileData = (data) => {
-  fs.writeFileSync('profile.json', JSON.stringify(data, null, 2));
-};
-
-// Route to get the current profile data (including profile picture)
-app.get('/profile', (req, res) => {
-  const profile = readProfileData();
-  res.json(profile);
-});
-
-// Route to update profile picture
-app.post('/profile/picture', upload.single('profilePicture'), (req, res) => {
-  const profile = readProfileData();
-
-  if (req.file) {
-    // Update profile picture in the JSON data
-    profile.user.profilePicture = req.file.filename;
-
-    // Save updated profile data back to the JSON file
-    writeProfileData(profile);
-
-    res.json({ message: 'Profile picture updated successfully.' });
-  } else {
-    res.status(400).json({ message: 'No file uploaded.' });
-  }
-});
-
-// Route to delete the profile picture (set it back to the default)
-app.delete('/profile/picture', (req, res) => {
-  const profile = readProfileData();
-
-  // Delete the uploaded picture if it exists (only if it's not the default one)
-  const currentPicturePath = path.join(uploadDir, profile.user.profilePicture);
-  if (fs.existsSync(currentPicturePath) && profile.user.profilePicture !== 'default-profile.jpg') {
-    fs.unlinkSync(currentPicturePath);
+app.post('/upload-file', upload.single('file'), (req, res) => {
+  if (!req.file) {
+      return res.status(400).send('No file uploaded.');
   }
 
-  // Set profile picture to the default one
-  profile.user.profilePicture = 'default-profile.jpg';
+  const filePath = path.join(__dirname, 'uploads', req.file.originalname);
+  const pfpPath = path.join(__dirname, 'uploads', 'currentpfp.txt');
 
-  // Save updated profile data back to the JSON file
-  writeProfileData(profile);
-
-  res.json({ message: 'Profile picture deleted (set to default).' });
+  fs.writeFile(pfpPath, filePath, (err) => {
+    if (err) {
+      return res.status(500).send('Error saving file path.');
+    }
+    res.send(`File "${req.file.originalname}" uploaded successfully and path saved.`);
+  })
 });
 
-// Start server
+app.get('/uploads/currentpfp', (req, res) => {
+  const pfpPath = path.join(__dirname, 'uploads', 'currentpfp.txt');
+
+  fs.readFile(pfpPath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Error reading profile file path.');
+    }
+    res.send(data);
+  });
+});
+
+app.get('/', (req, res) => {
+  res.send('This is a dummy output for the /root route');
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+
